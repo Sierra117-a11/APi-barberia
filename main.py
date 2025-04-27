@@ -5,6 +5,7 @@ from routes.usuario import router as usuario_router
 from routes.contacto import router as contacto_router
 from routes.agenda import router as agenda_router
 from routes.auth import router as auth_router
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI(
@@ -21,6 +22,14 @@ app.include_router(usuario_router, prefix="/api")
 app.include_router(contacto_router, prefix="/api")
 app.include_router(agenda_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Puedes poner tu dominio aquí luego
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
