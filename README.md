@@ -28,26 +28,27 @@ Este repositorio contiene una aplicación completa para una barbería, con front
 
 ## Estructura de Carpetas
 
+```plaintext
 API-barberia/
+├── backend/                     # Lógica del servidor (API)
+│   ├── app.py                   # Archivo principal de la aplicación
+│   ├── config/                  # Configuración de la base de datos y entorno
+│   ├── models/                  # Modelos de datos (ORM)
+│   ├── controllers/             # Controladores con lógica CRUD
+│   ├── routes/                  # Rutas de la API
+│   ├── scripts/                 # Scripts SQL para la base de datos
+│   └── requirements.txt         # Dependencias del proyecto
 │
-├── backend/ # Lógica del servidor (API)
-│ ├── app.py # Archivo principal de la aplicación
-│ ├── config/ # Configuración de la base de datos y variables de entorno
-│ ├── models/ # Definición de modelos de datos (ORM)
-│ ├── controllers/ # Lógica de controladores (CRUD)
-│ ├── routes/ # Definición de rutas de la API
-│ ├── scripts/ # Scripts SQL para inicializar/configurar la base de datos
-│ └── requirements.txt # Lista de dependencias del proyecto
-│
-└── frontend/ # Interfaz de usuario
-├── index.html # Página principal
-├── quienes-somos.html # Sección sobre la barbería
-├── cortes-y-estilos.html # Galería de cortes y estilos
-├── agendar.html # Página para agendar citas
-├── configurar-usuario.html # Página para gestionar datos del usuario
-├── contactos.html # Página de contacto o comentarios
-├── estilos.css # Estilos globales (CSS)
-└── scripts.js # Lógica del cliente (JavaScript)
+└── frontend/                    # Interfaz de usuario (cliente)
+    ├── index.html               # Página principal
+    ├── quienes-somos.html       # Sobre la barbería
+    ├── cortes-y-estilos.html    # Galería de estilos
+    ├── agendar.html             # Agendamiento de citas
+    ├── configurar-usuario.html  # Gestión de usuario
+    ├── contactos.html           # Contacto/comentarios
+    ├── estilos.css              # Estilos globales
+    └── scripts.js               # Lógica del cliente (JS)
+
 
 ---
 
