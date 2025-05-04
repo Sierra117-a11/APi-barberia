@@ -22,30 +22,32 @@ pueden gestionar información relacionada con los servicios ofrecidos.
 
 ---
 
-## 🧩 Estructura del proyecto
+# Estructura del Proyecto - API-barberia
 
-APi-barberia/
-│
-├─backend/
-│
-├── app.py # Archivo principal de la aplicación
-├── config/ # Configuración de la base de datos y variables de entorno
-├── models/ # Definición de modelos de datos (ORM)
-├── controllers/ # Lógica de controladores (CRUD)
-├── routes/ # Rutas de la API
-├── scripts/ # Scripts SQL para la base de datos
-├── requirements.txt # Dependencias del proyecto
-│
-├── frontend/
-├── index.html – Página principal.
-├── quienes-somos.html – Sección sobre la barbería.
-├── cortes-y-estilos.html – Galería de cortes y estilos.
-├── agendar.html – Página para agendar citas.
-├── configurar-usuario.html - pagina para gestionar usuario.
-├── contactos.html - pagina para comentar o contactarse con los usuarios. 
-├── estilos.css – Estilos globales.
-└── scripts.js – Lógica del cliente (JS).
+Este repositorio contiene una aplicación completa para una barbería, con frontend y backend integrados.
 
+## Estructura de Carpetas
+
+API-barberia/
+│
+├── backend/ # Lógica del servidor (API)
+│ ├── app.py # Archivo principal de la aplicación
+│ ├── config/ # Configuración de la base de datos y variables de entorno
+│ ├── models/ # Definición de modelos de datos (ORM)
+│ ├── controllers/ # Lógica de controladores (CRUD)
+│ ├── routes/ # Definición de rutas de la API
+│ ├── scripts/ # Scripts SQL para inicializar/configurar la base de datos
+│ └── requirements.txt # Lista de dependencias del proyecto
+│
+└── frontend/ # Interfaz de usuario
+├── index.html # Página principal
+├── quienes-somos.html # Sección sobre la barbería
+├── cortes-y-estilos.html # Galería de cortes y estilos
+├── agendar.html # Página para agendar citas
+├── configurar-usuario.html # Página para gestionar datos del usuario
+├── contactos.html # Página de contacto o comentarios
+├── estilos.css # Estilos globales (CSS)
+└── scripts.js # Lógica del cliente (JavaScript)
 
 ---
 
