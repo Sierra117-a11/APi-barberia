@@ -1,4 +1,3 @@
-
 # schemas/usuario.py
 from pydantic import BaseModel
 from typing import Optional
@@ -19,6 +18,6 @@ class UsuarioUpdate(UsuarioBase):
 
 class Usuario(UsuarioBase):
     id: int
-
+    rol: str  # Agregamos el rol al esquema de salida
     class Config:
         orm_mode = True

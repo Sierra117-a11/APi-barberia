@@ -202,6 +202,7 @@
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script  src="validacion.js"></script>
 <script>
     // Manejo de formulario de registro
     document.getElementById('register-form').addEventListener('submit', function(e) {
@@ -246,14 +247,20 @@
             headers: { 'Content-Type': 'application/json' }
         })
         .then(function(response) {
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("userCorreo", email);
 
-            // Mostrar enlaces si está logueado
-            document.getElementById('agendar-link').style.display = 'inline-block';
-            document.getElementById('configurar-link').style.display = 'inline-block';
+             const token = response.data.access_token;
+                
+                //alert("Token generado:\n" + token);
+               
+                localStorage.setItem("token", token);
+                localStorage.setItem("userCorreo", email);
+
+                
+
 
             alert("✅ ¡Bienvenido!");
+            window.location.href = "index.html";
+        
         })
         .catch(function(error) {
             alert("⚠️ Credenciales inválidas");
@@ -261,15 +268,10 @@
         });
     });
 
-    // Validar sesión al cargar la página
-    window.onload = function () {
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-        if (!isLoggedIn) return;
 
-        document.getElementById('agendar-link').style.display = 'inline-block';
-        document.getElementById('configurar-link').style.display = 'inline-block';
-    };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 </body>
 </html>
