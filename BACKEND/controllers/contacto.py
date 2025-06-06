@@ -1,7 +1,7 @@
 # controllers/contacto.py
 from sqlalchemy.orm import Session
-from models.contacto import Contacto
-from schemas.contacto import ContactoCreate
+from ..models.contacto import Contacto
+from ..schemas.contacto import ContactoCreate
 
 # Crear un nuevo mensaje/reseña
 def create_contacto(db: Session, contacto: ContactoCreate):

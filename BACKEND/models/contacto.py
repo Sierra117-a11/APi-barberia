@@ -1,7 +1,7 @@
 # models/contacto.py
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
-from config.database import Base
+from ..config.database import Base
 
 class Contacto(Base):
     __tablename__ = "contactos"

@@ -1,7 +1,7 @@
 #controllers/usuario.py
 from sqlalchemy.orm import Session
-from models.usuario import Usuario
-from schemas.usuario import UsuarioCreate, UsuarioUpdate
+from ..models.usuario import Usuario
+from ..schemas.usuario import UsuarioCreate, UsuarioUpdate
 
 
 def get_usuario_by_correo(db: Session, correo: str):

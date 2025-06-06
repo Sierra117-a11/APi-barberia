@@ -1,10 +1,10 @@
 # main.py
 from fastapi import FastAPI
-from config.database import engine, Base
-from routes.usuario import router as usuario_router
-from routes.contacto import router as contacto_router
-from routes.agenda import router as agenda_router
-from routes.auth import router as auth_router
+from .config.database import engine, Base
+from .routes.usuario import router as usuario_router
+from .routes.contacto import router as contacto_router
+from .routes.agenda import router as agenda_router
+from .routes.auth import router as auth_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.openapi.docs import get_swagger_ui_html  

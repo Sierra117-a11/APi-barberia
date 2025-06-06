@@ -1,7 +1,7 @@
 # models/usuario.py
 from sqlalchemy import Column, Integer, String, DateTime, Enum
 from sqlalchemy.sql import func
-from config.database import Base
+from ..config.database import Base
 import enum
 
 class RolEnum(str, enum.Enum):

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models.agenda import Agenda  # ✅ Usamos el modelo SQLAlchemy real
-from schemas.agenda import AgendaCreate, AgendaUpdate  # ✅ Solo esquemas Pydantic
+from ..models.agenda import Agenda  # ✅ Usamos el modelo SQLAlchemy real
+from ..schemas.agenda import AgendaCreate, AgendaUpdate  # ✅ Solo esquemas Pydantic
 from datetime import datetime, timedelta
 
 def obtener_agendas(db: Session):

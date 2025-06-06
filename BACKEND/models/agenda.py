@@ -1,6 +1,6 @@
 # models/agenda.py
 from sqlalchemy import Column, Integer, String, Date, DateTime
-from config.database import Base
+from ..config.database import Base
 
 class Agenda(Base):
     __tablename__ = "agenda"
