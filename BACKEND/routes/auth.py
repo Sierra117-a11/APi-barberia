@@ -16,7 +16,7 @@ def login(usuario: UsuarioCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Credenciales inválidas")
 
     access_token = create_access_token(
-        data={"email": db_usuario.correo, "rol": db_usuario.rol}
+    data={"id": db_usuario.id, "email": db_usuario.correo, "rol": db_usuario.rol}
     )
     return {"access_token": access_token, "token_type": "bearer"}
     

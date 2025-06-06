@@ -13,8 +13,10 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 class TokenData(BaseModel):
+    id: Optional[int] = None
     email: Optional[str] = None
     rol: Optional[str] = None
+
 
 def create_access_token(data: dict):
     to_encode = data.copy()
@@ -28,8 +30,10 @@ def verify_token(token: str, credentials_exception):
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("email")
         rol: str = payload.get("rol")
-        if email is None or rol is None:
+        id: int = payload.get("id")  # 👈 AÑADIR
+        if email is None or rol is None or id is None:
             raise credentials_exception
-        return TokenData(email=email, rol=rol)
+        return TokenData(id=id, email=email, rol=rol)
     except JWTError:
         raise credentials_exception
+

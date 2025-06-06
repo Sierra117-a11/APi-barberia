@@ -16,7 +16,7 @@ def listar_agendas(db: Session = Depends(get_db)):
 def crear_nueva_agenda(agenda: AgendaCreate, db: Session = Depends(get_db)):
     return crear_agenda(db, agenda)
 
-@router.put("/agenda/{id}", dependencies=[Depends(JWTBearer(required_role="admin"))])
+@router.put("/agenda/{id}", dependencies=[Depends(JWTBearer())])
 def actualizar_agenda_existente(id: int, agenda: AgendaCreate, db: Session = Depends(get_db)):
     updated_agenda = actualizar_agenda(db, id, agenda)
     if not updated_agenda:

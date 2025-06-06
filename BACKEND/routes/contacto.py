@@ -8,11 +8,10 @@ from auth.auth_bearer import JWTBearer
 
 router = APIRouter(tags=["Contactos"])
 
-# Solo clientes pueden crear y ver contactos
-@router.post("/contactos/", response_model=Contacto, dependencies=[Depends(JWTBearer(required_role="cliente"))])
+@router.post("/contactos/", response_model=Contacto)
 def crear_mensaje(contacto: ContactoCreate, db: Session = Depends(get_db)):
     return create_contacto(db, contacto)
 
-@router.get("/contactos/", response_model=list[Contacto], dependencies=[Depends(JWTBearer(required_role="cliente"))])
+@router.get("/contactos/", response_model=list[Contacto])
 def listar_mensajes(db: Session = Depends(get_db)):
     return get_contactos(db)

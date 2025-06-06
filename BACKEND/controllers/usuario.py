@@ -1,7 +1,12 @@
-# controllers/usuario.py
+#controllers/usuario.py
 from sqlalchemy.orm import Session
 from models.usuario import Usuario
 from schemas.usuario import UsuarioCreate, UsuarioUpdate
+
+
+def get_usuario_by_correo(db: Session, correo: str):
+    return db.query(Usuario).filter(Usuario.correo == correo).first()
+
 
 def create_usuario(db: Session, usuario: UsuarioCreate):
     db_usuario = Usuario(**usuario.dict())
@@ -16,7 +21,8 @@ def get_usuarios(db: Session):
 def get_usuario_by_id(db: Session, usuario_id: int):
     return db.query(Usuario).filter(Usuario.id == usuario_id).first()
 
-def get_usuario_by_correo(db: Session, correo: str):
+# 👇 Esta es la función que faltaba
+def get_usuario_by_email(db: Session, correo: str):
     return db.query(Usuario).filter(Usuario.correo == correo).first()
 
 def update_usuario(db: Session, usuario_id: int, usuario_data: UsuarioUpdate):
