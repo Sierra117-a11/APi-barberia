@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL ARTE DEL BARBERO ® | Tradición y Estilo</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <img class="logo" src="imagenes/Whithe.png" alt="Logo" />
+                <span class="company-name ms-2">El Arte del Barbero</span>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cortes-y-estilos.html">Cortes y Estilos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quienes-somos.html">Quiénes Somos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+
+                    <!-- ENLACES OCULTOS INICIALMENTE -->
+                    <li class="nav-item" id="agendar-link" style="display: none;">
+                        <a class="nav-link" href="agendar.html">Agendar</a>
+                    </li>
+                    <li class="nav-item" id="configurar-link" style="display: none;">
+                        <a class="nav-link" href="configurar-usuario.html">Configurar Usuario</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="text-white me-2"><i class="user-icon">👤</i></a>
+                    <a href="#" class="text-white"><i class="cart-icon">🛒</i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Carousel -->
+<section class="carousel mt-4">
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1593702295094-aea22597af65?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8xJfx..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://uploads.lebonbon.fr/source/2021/december/45402/barbier-marseille_1_2000.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.squarespace-cdn.com/content/v1/62f1307024cba25fc6025b32/31700a79-c001-45ff-9809-3081c8dcbf5b/AdobeStock_374326500.jpeg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+<!-- Sección de Autenticación -->
+<section class="container my-5" id="auth-section">
+    <div class="card p-4 shadow-lg">
+        <div class="text-center mb-4">
+            <img src="imagenes/icon.png" alt="Imagen de autenticación" style="max-width: 150px;">
+        </div>
+        <div class="d-flex justify-content-around mb-4">
+            <button id="show-login" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+            <button id="show-register" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Registrarse</button>
+        </div>
+    </div>
+</section>
+
+<!-- Modal de Iniciar Sesión -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label for="login-nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="login-nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="login-apellido" class="form-label">Apellido:</label>
+                        <input type="text" class="form-control" id="login-apellido" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="login-email" class="form-label">Correo Electrónico:</label>
+                        <input type="email" class="form-control" id="login-email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="login-password" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                </form>
+                <div id="mensaje-alerta" class="text-danger mt-3 d-none text-center">
+                    <p>Debes iniciar sesión o registrarte para agendar una cita.</p>
+                </div>
+                <div class="g-signin2 mt-4" data-onsuccess="onSignIn"></div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-muted">¿No tienes cuenta?
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Regístrate aquí</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Registro -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Registrarse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <div class="mb-3">
+                        <label for="register-nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="register-nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="register-apellido" class="form-label">Apellido:</label>
+                        <input type="text" class="form-control" id="register-apellido" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="register-email" class="form-label">Correo Electrónico:</label>
+                        <input type="email" class="form-control" id="register-email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="register-password" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="register-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Registrarse</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-muted">¿Ya tienes cuenta?
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Inicia sesión aquí</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer mt-5">
+    <div class="footer-container">
+        <div class="footer-info">
+            <h4>CONTACTO</h4>
+            <p><i class="icon">📍</i> Cra. 24A #60-58, Las Moras, Soledad, Atlántico</p>
+            <p><i class="icon">📞</i> +1 5589 55488 55</p>
+            <p><i class="icon">✉️</i> info@example.com</p>
+        </div>
+        <div class="footer-links">
+            <h4>VISITA</h4>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="cortes_y_estilos.html">Cortes y Estilos</a></li>
+                <li><a href="quienes_somos.html">Quiénes Somos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <h4>Síguenos</h4>
+            <div class="social-icons">
+                <a href="#"><i class="icon">🌐</i> Facebook</a>
+                <a href="#"><i class="icon">🐦</i> Twitter</a>
+                <a href="#"><i class="icon">📸</i> Instagram</a>
+                <a href="#"><i class="icon">🔗</i> LinkedIn</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025, Jose Camargo, German Gutiérrez Julian Venegas y Victor Yepéz.</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script  src="validacion.js"></script>
+<script>
+    // Manejo de formulario de registro
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nombre = document.getElementById('register-nombre').value.trim();
+        const apellido = document.getElementById('register-apellido').value.trim();
+        const email = document.getElementById('register-email').value.trim();
+        const password = document.getElementById('register-password').value;
+
+        axios.post('http://127.0.0.1:8000/api/usuarios/', {
+            nombre,
+            apellido,
+            correo: email,
+            contraseña: password
+        })
+        .then(function(response) {
+            alert("✅ Registro exitoso");
+            document.getElementById('register-form').reset();
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+            alert("❌ Error al registrar");
+        });
+    });
+
+    // Manejo de inicio de sesión
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nombre = document.getElementById('login-nombre').value.trim();
+        const apellido = document.getElementById('login-apellido').value.trim();
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+
+        axios.post('http://127.0.0.1:8000/api/login', {
+            nombre,
+            apellido,
+            correo: email,
+            contraseña: password
+        }, {
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(function(response) {
+
+             const token = response.data.access_token;
+                
+                //alert("Token generado:\n" + token);
+               
+                localStorage.setItem("token", token);
+                localStorage.setItem("userCorreo", email);
+
+                
+
+
+            alert("✅ ¡Bienvenido!");
+            window.location.href = "index.html";
+        
+        })
+        .catch(function(error) {
+            alert("⚠️ Credenciales inválidas");
+            console.error('Error:', error);
+        });
+    });
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+</body>
+</html>

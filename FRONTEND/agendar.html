@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="icon" href="imagenes/favicon-32x32 barber.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita - El Arte del Barbero</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <header>
+        
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <img class="logo" src="imagenes/Whithe.png" alt="Logo" />
+                    <span class="company-name ms-2">El Arte del Barbero</span>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="quienes-somos.html">Quiénes Somos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cortes-y-estilos.html">Cortes y Estilos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="#" class="text-white me-2"><i class="user-icon">👤</i></a>
+                        <a href="#" class="text-white"><i class="cart-icon">🛒</i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Formulario para Agendar Cita</h2>
+
+        <div class="card p-4 shadow-lg">
+            <form id="form-agenda">
+                <div class="mb-3">
+                    <label for="nombreCompleto" class="form-label">Nombre Completo:</label>
+                    <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto"
+                        placeholder="Ingresa tu nombre completo" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="numeroCelular" class="form-label">Número de Celular:</label>
+                    <input type="text" class="form-control" id="numeroCelular" name="numeroCelular"
+                        placeholder="Ingresa tu número de celular" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="edad" class="form-label">Edad:</label>
+                    <input type="number" class="form-control" id="edad" name="edad" placeholder="Ingresa tu edad"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="correoElectronico" class="form-label">Correo Electrónico:</label>
+                    <input type="email" class="form-control" id="correoElectronico" name="correoElectronico"
+                        placeholder="Ingresa tu correo electrónico" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fechaSolicitud" class="form-label">Fecha de Solicitud:</label>
+                    <input type="date" class="form-control" id="fechaSolicitud" name="fechaSolicitud" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fechaHoraCita" class="form-label">Fecha y Hora de la Cita:</label>
+                    <input type="datetime-local" class="form-control" id="fechaHoraCita" name="fechaHoraCita" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipoCorte" class="form-label">Tipo de Corte de Cabello:</label>
+                    <select class="form-select" id="tipoCorte" name="tipoCorte" required>
+                        <option value="fade">Corte Fade</option>
+                        <option value="pompadour">Corte Pompadour</option>
+                        <option value="buzz">Corte Buzz</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Agendar Cita</button>
+            </form>
+        </div>
+
+        
+        <div id="agenda-actions" class="mt-5">
+            <h2 class="text-center mb-4">Acciones de Agenda</h2>
+            <div class="d-flex justify-content-around mb-3">
+                <button class="btn btn-warning" id="btn-actualizar">Actualizar Agenda</button>
+                <button class="btn btn-danger" id="btn-eliminar">Eliminar Agenda</button>
+            </div>
+
+            <div class="mb-3">
+                <label for="agendaId" class="form-label">ID de Agenda:</label>
+                <input type="number" class="form-control" id="agendaId" placeholder="Ingresa el ID de la agenda">
+            </div>
+        </div>
+ 
+
+        <div id="agenda-list" class="mt-4">
+            <h3 class="text-center mb-3">Lista de Agendas</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Celular</th>
+                        <th>Edad</th>
+                        <th>Correo</th>
+                        <th>Fecha Solicitud</th>
+                        <th>Fecha y Hora Cita</th>
+                        <th>Tipo Corte</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+<script>
+// Verificar sesión
+window.onload = function() {
+    const token = localStorage.getItem("token");
+    
+    if (!token) {
+        alert("⚠️ Debes iniciar sesión primero.");
+        window.location.href = "index.html";
+        return;
+    }
+    // Validar rol desde el token
+    function obtenerRolDesdeToken(token) {
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            return payload.rol;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    const rol = obtenerRolDesdeToken(token);
+
+    // Ocultar botón eliminar si es cliente
+    if (rol !== "admin") {
+        document.getElementById("btn-eliminar")?.classList.add("d-none");
+    }
+
+
+
+
+    // Manejar envío del formulario
+    document.getElementById("form-agenda").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const nombreCompleto = document.getElementById("nombreCompleto").value.trim();
+        const numeroCelular = document.getElementById("numeroCelular").value.trim();
+        const edad = parseInt(document.getElementById("edad").value);
+        const correoElectronico = document.getElementById("correoElectronico").value.trim();
+        const fechaSolicitud = document.getElementById("fechaSolicitud").value;
+        const fechaHoraCita = document.getElementById("fechaHoraCita").value;
+        const tipoCorte = document.getElementById("tipoCorte").value.trim();
+
+        axios.post('http://127.0.0.1:8000/api/agenda', {
+            nombre_completo: nombreCompleto,
+            celular: numeroCelular,
+            edad: edad,
+            correo: correoElectronico,
+            fecha_solicitud: fechaSolicitud,
+            fecha_hora_agenda: fechaHoraCita,
+            tipo_corte: tipoCorte
+        },{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(function () {
+            alert("✅ ¡Cita agendada exitosamente!");
+            document.getElementById("form-agenda").reset();
+            consultarAgendas(); // Actualizar tabla
+        })
+        .catch(function (error) {
+            console.error("Error al agendar cita:", error);
+            alert("❌ Error al agendar la cita.");
+        });
+    });
+
+    // Obtener y mostrar agendas
+    function consultarAgendas() {
+        axios.get("http://127.0.0.1:8000/api/agenda",{
+            
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        
+        })
+            .then(res => {
+                const tbody = document.querySelector("#agenda-list tbody");
+                tbody.innerHTML = "";
+                res.data.forEach(agenda => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${agenda.id}</td>
+                        <td>${agenda.nombre_completo}</td>
+                        <td>${agenda.celular}</td>
+                        <td>${agenda.edad}</td>
+                        <td>${agenda.correo}</td>
+                        <td>${agenda.fecha_solicitud}</td>
+                        <td>${agenda.fecha_hora_agenda}</td>
+                        <td>${agenda.tipo_corte}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(err => {
+                console.error("Error al obtener agendas:", err);
+                alert("❌ No se pudieron cargar las agendas.");
+            });
+    }
+
+    // Actualizar agenda
+    document.getElementById("btn-actualizar")?.addEventListener("click", function () {
+        const agendaId = document.getElementById("agendaId").value;
+        if (!agendaId) {
+            alert("⚠️ Ingresa el ID de la agenda a actualizar.");
+            return;
+        }
+
+        const updatedData = {
+            nombre_completo: document.getElementById("nombreCompleto").value.trim(),
+            celular: document.getElementById("numeroCelular").value.trim(),
+            edad: parseInt(document.getElementById("edad").value),
+            correo: document.getElementById("correoElectronico").value.trim(),
+            fecha_solicitud: document.getElementById("fechaSolicitud").value,
+            fecha_hora_agenda: document.getElementById("fechaHoraCita").value,
+            tipo_corte: document.getElementById("tipoCorte").value.trim()
+        };
+
+        axios.put(`http://127.0.0.1:8000/api/agenda/${agendaId}`, updatedData,{
+            
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        
+        })
+            .then(() => {
+                alert("✅ Agenda actualizada correctamente.");
+                consultarAgendas();
+            })
+            .catch(err => {
+                console.error("Error al actualizar:", err);
+                alert("❌ Error al actualizar la agenda.");
+            });
+    });
+
+    // Eliminar agenda
+    document.getElementById("btn-eliminar")?.addEventListener("click", function () {
+        const agendaId = document.getElementById("agendaId").value;
+        if (!agendaId) {
+            alert("⚠️ Ingresa el ID de la agenda a eliminar.");
+            return;
+        }
+
+        if (confirm("¿Estás seguro de eliminar esta cita?")) {
+            axios.delete(`http://127.0.0.1:8000/api/agenda/${agendaId}`,{
+                
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        
+            })
+                .then(() => {
+                    alert("✅ Cita eliminada exitosamente.");
+                    consultarAgendas();
+                })
+                .catch(err => {
+                    console.error("Error al eliminar:", err);
+                    alert("❌ No se pudo eliminar la cita.");
+                });
+        }
+    });
+
+    consultarAgendas();
+ 
+}
+</script>
+
+
+</html>
