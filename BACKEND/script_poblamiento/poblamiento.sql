@@ -10,7 +10,7 @@ INSERT INTO `contactos` (`id`, `nombre`, `correo`, `mensaje`, `fecha_contacto`) 
   (1, 'Eduardo Soto', 'esoto@gmail.com', 'hhhh', '2025-06-05 12:38:23');
 
 -- Poblamiento de la tabla `usuarios`
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `correo`, `contraseña`, `rol`, `fecha_registro`) VALUES
-  (1, 'Jose', 'Camargo', 'jc83@gmail.com', '2323', 'admin', '2025-06-02 19:38:14'),
-  (2, 'brandon', 'calderon', 'bcaldeeron@gmail.com', '1245', 'cliente', '2025-06-05 12:14:56'),
-  (3, 'eduardo', 'soto', 'esoto@gmail.com', '4545', 'cliente', '2025-06-05 12:23:59');
+INSERT INTO `usuarios` (`nombre`, `apellido`, `correo`, `contraseña`, `rol`, `fecha_registro`) VALUES
+  ( 'Jose', 'Camargo', 'jc83@gmail.com', '2323', 'admin', '2025-06-02 19:38:14'),
+  ('brandon', 'calderon', 'bcaldeeron@gmail.com', '1245', 'cliente', '2025-06-05 12:14:56'),
+  ( 'eduardo', 'soto', 'esoto@gmail.com', '4545', 'cliente', '2025-06-05 12:23:59');
