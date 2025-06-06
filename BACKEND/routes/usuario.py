@@ -1,10 +1,10 @@
 #routes/usuario.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from config.database import get_db
-from controllers.usuario import create_usuario, delete_usuario, get_usuarios, update_usuario, get_usuario_by_email
-from schemas.usuario import UsuarioCreate, UsuarioUpdate, Usuario
-from auth.auth_bearer import JWTBearer, TokenData
+from ..config.database import get_db
+from ..controllers.usuario import create_usuario, delete_usuario, get_usuarios, update_usuario, get_usuario_by_email
+from ..schemas.usuario import UsuarioCreate, UsuarioUpdate, Usuario
+from ..auth.auth_bearer import JWTBearer, TokenData
 
 
 router = APIRouter(tags=["Usuarios"])

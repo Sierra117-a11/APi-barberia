@@ -1,5 +1,4 @@
 # main.py
-# main.py
 from fastapi import FastAPI
 from config.database import engine, Base
 from routes.usuario import router as usuario_router

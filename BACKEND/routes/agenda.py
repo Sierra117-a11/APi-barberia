@@ -1,10 +1,10 @@
 # routes/agenda.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from config.database import get_db
-from controllers.agenda import obtener_agendas, crear_agenda, actualizar_agenda, eliminar_agenda, agendas_semana
-from schemas.agenda import AgendaCreate, Agenda
-from auth.auth_bearer import JWTBearer
+from ..config.database import get_db
+from ..controllers.agenda import obtener_agendas, crear_agenda, actualizar_agenda, eliminar_agenda, agendas_semana
+from ..schemas.agenda import AgendaCreate, Agenda
+from ..auth.auth_bearer import JWTBearer
 
 router = APIRouter(tags=["Agendas"])
 

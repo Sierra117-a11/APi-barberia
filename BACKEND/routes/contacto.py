@@ -1,10 +1,10 @@
 # routes/contacto.py
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from schemas.contacto import ContactoCreate, Contacto
-from controllers.contacto import create_contacto, get_contactos
-from config.database import get_db
-from auth.auth_bearer import JWTBearer
+from ..schemas.contacto import ContactoCreate, Contacto
+from ..controllers.contacto import create_contacto, get_contactos
+from ..config.database import get_db
+from ..auth.auth_bearer import JWTBearer
 
 router = APIRouter(tags=["Contactos"])
 

@@ -4,8 +4,8 @@ from typing import Optional
 from jose import JWTError, jwt
 from fastapi import HTTPException
 from pydantic import BaseModel
-from config.database import get_db
-from models.usuario import Usuario
+from ..config.database import get_db
+from ..models.usuario import Usuario
 from sqlalchemy.orm import Session
 
 SECRET_KEY = "5m)-3#w%p(@=h-esz()fnrmfzh$#yp2idddddsr"  # Usa la misma clave que antes
