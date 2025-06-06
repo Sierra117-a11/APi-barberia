@@ -85,6 +85,10 @@
     <section class="mt-5 text-center">
         <button id="eliminar-cuenta-btn" class="btn btn-danger">Eliminar Cuenta</button>
     </section>
+    <!-- Botón Cerrar Sesión -->
+    <section class="mt-5 text-center">
+        <button id="cerrar-sesion-btn" class="btn btn-secondary">Cerrar Sesión</button>
+    </section>
 
     <!-- Botón Ver Usuarios -->
     <section class="mt-5 text-center">
@@ -132,106 +136,124 @@
 </footer>
 
 <!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+
 <script>
-    window.onload = function() {
+window.onload = function () {
+    const token = localStorage.getItem("token");
+    const correo = localStorage.getItem("userCorreo");
 
-        const token = localStorage.getItem("token");
-        const correo = localStorage.getItem("userCorreo");
+    if (!token) {
+        alert("Debes iniciar sesión.");
+        window.location.href = "index.html";
+        return;
+    }
+
+    // Cargar datos del usuario logueado
+    axios.get(`http://127.0.0.1:8000/api/usuarios/buscar?correo=${correo}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => {
+        const user = res.data;
+
+        document.getElementById("nombre").value = user.nombre;
+        document.getElementById("apellido").value = user.apellido;
+        document.getElementById("correo").value = user.correo;
+        document.getElementById("usuario-id").value = user.id;
+
+        // Guardar rol del usuario
+        const userRole = user.rol;
+        window.userRole = userRole;
+
+        // Ocultar botón "Ver Usuarios" si no es admin
+        if (userRole !== "admin") {
+            document.getElementById("ver-usuarios-btn").style.display = "none";
+        }
+
+    })
+    .catch(err => {
+        console.error("Error al obtener datos:", err);
+        alert("No se pudo cargar tu perfil.");
+    });
    
-    
-        axios.get(`http://127.0.0.1:8000/api/usuarios/?correo=${correo}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(res => {
-                const user = res.data[0];
-                if (!user) return;
 
-                document.getElementById("nombre").value = user.nombre;
-                document.getElementById("apellido").value = user.apellido;
-                document.getElementById("correo").value = user.correo;
-                document.getElementById("usuario-id").value = user.id; // Guardar el ID del usuario
-            })
-            .catch(err => {
-                console.error("Error al obtener datos del usuario:", err);
-                alert("No se pudo cargar tu perfil. Inténtalo nuevamente.");
-            });
-    
-    
-    // Actualizar datos del usuario
+    // Actualizar datos
     document.getElementById("update-form").addEventListener("submit", function (e) {
         e.preventDefault();
-
         const nombre = document.getElementById("nombre").value.trim();
         const apellido = document.getElementById("apellido").value.trim();
         const correo = document.getElementById("correo").value.trim();
         const nuevaContraseña = document.getElementById("nueva-contraseña").value.trim();
-        const userId = document.getElementById("usuario-id").value; // Usar el ID del usuario
+        const userId = document.getElementById("usuario-id").value;
 
-       
-       axios.put(
-  `http://127.0.0.1:8000/api/usuarios/${userId}`,
-  {
-    nombre,
-    apellido,
-    correo,
-    contraseña: nuevaContraseña || undefined
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
-)
+        axios.put(`http://127.0.0.1:8000/api/usuarios/${userId}`, {
+            nombre,
+            apellido,
+            correo,
+            contraseña: nuevaContraseña || undefined
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         .then(() => {
             alert("Datos actualizados correctamente.");
         })
         .catch(err => {
-            console.error("Error al actualizar datos:", err);
+            console.error("Error al actualizar:", err);
             alert("Hubo un problema al actualizar tus datos.");
         });
     });
 
     // Eliminar cuenta
     document.getElementById("eliminar-cuenta-btn").addEventListener("click", () => {
+        const userId = document.getElementById("usuario-id").value;
+
         if (confirm("¿Estás seguro de querer eliminar tu cuenta? Esta acción es irreversible.")) {
-            const userId = document.getElementById("usuario-id").value; // Usar el ID del usuario
-
-            axios.delete(`http://127.0.0.1:8000/api/usuarios/${userId}`),{
+            axios.delete(`http://127.0.0.1:8000/api/usuarios/${userId}`, {
                 headers: {
-      Authorization: `Bearer ${token}`
-    }
-            }
-
-                .then(() => {
-                    alert("Cuenta eliminada exitosamente.");
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("userCorreo");
-                    window.location.href = "index.html";
-                })
-                .catch(err => {
-                    console.error("Error al eliminar cuenta:", err);
-                    alert("No se pudo eliminar tu cuenta. Inténtalo nuevamente.");
-                });
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then(() => {
+                alert("Cuenta eliminada exitosamente.");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userCorreo");
+                window.location.href = "index.html";
+            })
+            .catch(err => {
+                console.error("Error al eliminar:", err);
+                alert("No se pudo eliminar tu cuenta.");
+            });
         }
     });
 
-    // Ver usuarios
+    // Botón de cerrar sesión
+    document.getElementById("cerrar-sesion-btn").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userCorreo");
+        alert("Sesión cerrada correctamente.");
+        window.location.href = "index.html";
+    });
+    // Botón Ver Usuarios (solo visible si es admin)
     document.getElementById("ver-usuarios-btn").addEventListener("click", () => {
+        if (window.userRole !== "admin") return;
+
         const lista = document.getElementById("usuarios-lista");
         const seccion = document.getElementById("usuarios-seccion");
         seccion.classList.remove("d-none");
 
-        // Limpiar contenido previo y mostrar spinner
         lista.innerHTML = `
-            <div class="text-center">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Cargando...</span>
-                </div>
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
             </div>
-        `;
+        </div>
+    `;
 
         axios.get("http://127.0.0.1:8000/api/usuarios/", {
             headers: {
@@ -239,8 +261,7 @@
             }
         })
             .then(res => {
-                lista.innerHTML = ""; // Limpiar spinner
-
+                lista.innerHTML = "";
                 if (res.data.length === 0) {
                     lista.innerHTML = "<p class='text-center'>No hay usuarios registrados aún.</p>";
                     return;
@@ -248,16 +269,15 @@
 
                 res.data.forEach(usuario => {
                     const cardHTML = `
-                        <div class="col-md-6 mb-4">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title">${usuario.nombre} ${usuario.apellido}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">${usuario.correo}</h6>
-                                    <small class="text-muted">${new Date(usuario.fecha_registro).toLocaleString()}</small>
-                                </div>
-                            </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">${usuario.nombre} ${usuario.apellido}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${usuario.correo}</h6>
                         </div>
-                    `;
+                    </div>
+                </div>
+            `;
                     lista.innerHTML += cardHTML;
                 });
             })
@@ -266,6 +286,7 @@
                 lista.innerHTML = "<p class='text-danger text-center'>❌ No se pudieron cargar los usuarios.</p>";
             });
     });
- }
-</script>
 
+
+}
+</script>

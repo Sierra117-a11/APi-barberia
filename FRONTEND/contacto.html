@@ -153,16 +153,6 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
-
-    // Verificar sesión
-window.onload = function() {
-    const token = localStorage.getItem("token");
-    
-    if (!token) {
-        alert("⚠️ Debes iniciar sesión primero.");
-        window.location.href = "index.html";
-        return;
-    }
     // Enviar mensaje de contacto
     document.getElementById('contact-form').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -180,10 +170,6 @@ window.onload = function() {
             nombre,
             correo,
             mensaje
-        },{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
         })
         .then(function(response) {
             console.log('Mensaje guardado:', response.data);
@@ -211,14 +197,7 @@ window.onload = function() {
             </div>
         `;
 
-        axios.get('http://127.0.0.1:8000/api/contactos/',{
-            
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        
-        })
-
+        axios.get('http://127.0.0.1:8000/api/contactos/')
             .then(function (response) {
                 lista.innerHTML = ''; // Limpiar spinner
 
@@ -248,7 +227,6 @@ window.onload = function() {
                 lista.innerHTML = '<p class="text-danger text-center">Error al cargar los comentarios.</p>';
             });
     });
-}   
 </script>
 </body>
 
